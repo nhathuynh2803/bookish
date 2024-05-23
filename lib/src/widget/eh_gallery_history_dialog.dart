@@ -6,12 +6,13 @@ import 'package:jhentai/src/utils/route_util.dart';
 import 'package:jhentai/src/widget/eh_wheel_speed_controller.dart';
 
 import '../config/ui_config.dart';
+import '../model/child_gallery.dart';
 import '../routes/routes.dart';
 
 class EHGalleryHistoryDialog extends StatelessWidget {
   final String currentGalleryTitle;
   final GalleryUrl? parentUrl;
-  final List<({GalleryUrl galleryUrl, String title, String updateTime})>? childrenGallerys;
+  final List<ChildGallery>? childrenGallerys;
 
   const EHGalleryHistoryDialog({
     super.key,

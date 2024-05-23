@@ -123,7 +123,7 @@ class GalleryImagePageLogic extends GetxController {
 
     await tagTranslationService.translateTagsIfNeeded(detailsPageInfo.galleryDetails.tags);
 
-    _addColor2WatchedTags(detailsPageInfo.galleryDetails!.tags);
+    _addColor2WatchedTags(detailsPageInfo.galleryDetails.tags);
 
     if (isClosed) {
       return;

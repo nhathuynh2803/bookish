@@ -1,10 +1,11 @@
 import 'dart:collection';
 
+import 'package:jhentai/src/model/base_model.dart';
 import 'package:jhentai/src/model/gallery_image.dart';
 import 'package:jhentai/src/model/gallery_tag.dart';
 import 'package:jhentai/src/model/gallery_url.dart';
 
-class Gallery {
+class Gallery extends Model<Gallery> {
   GalleryUrl galleryUrl;
   String title;
   String category;
@@ -58,6 +59,7 @@ class Gallery {
     this.blockedByLocalRules = false,
   });
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'gid': gid,
@@ -145,5 +147,24 @@ class Gallery {
       tags: tags ?? this.tags,
       blockedByLocalRules: blockedByLocalRules ?? this.blockedByLocalRules,
     );
+  }
+  
+  @override
+  Gallery fromJson(Map<String, dynamic> map) {
+    galleryUrl = GalleryUrl.fromJson(map['galleryUrl']);
+    title = map['title'];
+    category = map['category'];
+    cover = GalleryImage.fromJson(map['cover']);
+    pageCount = map['pageCount'];
+    rating = map['rating'];
+    hasRated = map['hasRated'];
+    favoriteTagIndex = map['favoriteTagIndex'];
+    favoriteTagName = map['favoriteTagName'];
+    language = map['language'];
+    uploader = map['uploader'];
+    publishTime = map['publishTime'];
+    isExpunged = map['isExpunged'];
+    tags = LinkedHashMap<String, List<GalleryTag>>.from(map['tags']);
+    return this;
   }
 }

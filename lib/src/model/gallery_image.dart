@@ -1,6 +1,7 @@
 import '../service/gallery_download_service.dart';
+import 'base_model.dart';
 
-class GalleryImage {
+class GalleryImage extends Model<GalleryImage> {
   String url;
   double? height;
   double? width;
@@ -29,6 +30,7 @@ class GalleryImage {
     this.downloadStatus = DownloadStatus.none,
   });
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       "url": url,
@@ -87,5 +89,20 @@ class GalleryImage {
   @override
   String toString() {
     return 'GalleryImage{url: $url, height: $height, width: $width, originalImageUrl: $originalImageUrl, originalImageHeight: $originalImageHeight, originalImageWidth: $originalImageWidth, reloadKey: $reloadKey, path: $path, imageHash: $imageHash, downloadStatus: $downloadStatus}';
+  }
+  
+  @override
+  GalleryImage fromJson(Map<String, dynamic> map) {
+    url = map['url'];
+    height = map['height'];
+    width = map['width'];
+    originalImageUrl = map['originalImageUrl'];
+    originalImageHeight = map['originalImageHeight'];
+    originalImageWidth = map['originalImageWidth'];
+    reloadKey = map['reloadKey'];
+    imageHash = map['imageHash'];
+    path = map['path'];
+    downloadStatus = DownloadStatus.values[map['downloadStatus']];
+    return this;
   }
 }

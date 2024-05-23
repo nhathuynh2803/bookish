@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 
-class GalleryCount {
+import 'base_model.dart';
+
+class GalleryCount extends Model<GalleryCount> {
   final String? count;
   final GalleryCountType type;
 
-  const GalleryCount({this.count, required this.type});
+  GalleryCount({this.count, required this.type});
 
   String toPrintString() {
     switch (type) {
@@ -20,6 +22,29 @@ class GalleryCount {
   @override
   String toString() {
     return 'GalleryCount{count: $count, type: $type}';
+  }
+
+  factory GalleryCount.fromJson(Map<String, dynamic> map) {
+    return GalleryCount(
+      count: map['count'],
+      type: GalleryCountType.values[map['type']],
+    );
+  }
+
+  @override
+  GalleryCount fromJson(Map<String, dynamic> map) {
+    return GalleryCount(
+      count: map['count'],
+      type: GalleryCountType.values[map['type']],
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['count'] = count;
+    data['type'] = type.index;
+    return data;
   }
 }
 

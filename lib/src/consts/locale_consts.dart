@@ -1,5 +1,6 @@
 class LocaleConsts {
   static const Map<String, String> language2Abbreviation = {
+    'vietnamese': 'VI',
     'chinese': 'ZH',
     'japanese': 'JP',
     'english': 'EN',
@@ -16,11 +17,12 @@ class LocaleConsts {
   };
 
   static Map<String, String> localeCode2Description = {
+    'vi_VN': 'Vietnamese',
     'zh_CN': '简体中文',
     'zh_TW': '繁體中文(台灣)',
     'en_US': 'English',
     'pt_BR': 'Português brasileiro',
-    'ko_KR': '한국어'
+    'ko_KR': '한국어',
   };
 
   static const Map<String, String> tagNamespace = {

@@ -1,14 +1,16 @@
 import 'dart:collection';
 
+import 'package:jhentai/src/model/child_gallery.dart';
 import 'package:jhentai/src/model/gallery.dart';
 import 'package:jhentai/src/model/gallery_url.dart';
 
+import 'base_model.dart';
 import 'gallery_comment.dart';
 import 'gallery_image.dart';
 import 'gallery_tag.dart';
 import 'gallery_thumbnail.dart';
 
-class GalleryDetail {
+class GalleryDetail extends Model<GalleryDetail> {
   GalleryUrl galleryUrl;
   String rawTitle;
   String? japaneseTitle;
@@ -40,7 +42,7 @@ class GalleryDetail {
   String torrentPageUrl;
   String archivePageUrl;
   GalleryUrl? parentGalleryUrl;
-  List<({GalleryUrl galleryUrl, String title, String updateTime})>? childrenGallerys;
+  List<ChildGallery>? childrenGallerys;
   List<GalleryComment> comments;
   List<GalleryThumbnail> thumbnails;
   int thumbnailsPageCount;
@@ -96,5 +98,43 @@ class GalleryDetail {
       isExpunged: isExpunged,
       tags: tags,
     );
+  }
+
+  @override
+  GalleryDetail fromJson(Map<String, dynamic> map) {
+    galleryUrl = GalleryUrl.fromJson(map['galleryUrl']);
+    rawTitle = map['rawTitle'];
+    japaneseTitle = map['japaneseTitle'];
+    category = map['category'];
+    cover = GalleryImage.fromJson(map['cover']);
+    pageCount = map['pageCount'];
+    rating = map['rating'];
+    realRating = map['realRating'];
+    hasRated = map['hasRated'];
+    ratingCount = map['ratingCount'];
+    favoriteTagIndex = map['favoriteTagIndex'];
+    favoriteTagName = map['favoriteTagName'];
+    favoriteCount = map['favoriteCount'];
+    language = map['language'];
+    uploader = map['uploader'];
+    publishTime = map['publishTime'];
+    isExpunged = map['isExpunged'];
+    tags = LinkedHashMap<String, List<GalleryTag>>.from(map['tags']);
+    size = map['size'];
+    torrentCount = map['torrentCount'];
+    torrentPageUrl = map['torrentPageUrl'];
+    archivePageUrl = map['archivePageUrl'];
+    parentGalleryUrl = map['parentGalleryUrl'];
+    childrenGallerys = List<ChildGallery>.from(map['childrenGallerys']);
+    comments = List<GalleryComment>.from(map['comments']);
+    thumbnails = List<GalleryThumbnail>.from(map['thumbnails']);
+    thumbnailsPageCount = map['thumbnailsPageCount'];
+    return this;
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    // TODO: implement toJson
+    throw UnimplementedError();
   }
 }

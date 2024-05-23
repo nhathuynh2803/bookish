@@ -13,6 +13,7 @@ import 'package:j_downloader/j_downloader.dart';
 import 'package:jhentai/src/consts/eh_consts.dart';
 import 'package:jhentai/src/database/database.dart';
 import 'package:jhentai/src/exception/eh_site_exception.dart';
+import 'package:jhentai/src/model/base_model.dart';
 import 'package:jhentai/src/model/gallery_page.dart';
 import 'package:jhentai/src/model/search_config.dart';
 import 'package:jhentai/src/network/eh_timeout_translator.dart';
@@ -905,7 +906,11 @@ emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
     if (parser == null) {
       return response as T;
     }
-    return IsolateService.run((list) => parser(list[0], list[1]), [response.headers, response.data]);
+    var result = await IsolateService.run((list) => parser(list[0], list[1]), [response.headers, response.data]);
+    if(result is Model){
+      Log.debug(result.toJson());
+    }
+    return result;
   }
 
   static Future<Response> _getWithErrorHandler<T>(

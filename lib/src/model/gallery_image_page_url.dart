@@ -1,6 +1,8 @@
 import 'package:jhentai/src/exception/internal_exception.dart';
 
-class GalleryImagePageUrl {
+import 'base_model.dart';
+
+class GalleryImagePageUrl extends Model<GalleryImagePageUrl> {
   final bool isEH;
 
   final String imageToken;
@@ -9,7 +11,7 @@ class GalleryImagePageUrl {
 
   final int pageNo;
 
-  const GalleryImagePageUrl({
+  GalleryImagePageUrl({
     required this.isEH,
     required this.gid,
     required this.imageToken,
@@ -41,4 +43,33 @@ class GalleryImagePageUrl {
   }
 
   String get url => isEH ? 'https://e-hentai.org/s/$imageToken/$gid-$pageNo' : 'https://exhentai.org/s/$imageToken/$gid-$pageNo';
+
+  factory GalleryImagePageUrl.fromJson(Map<String, dynamic> map) {
+    return GalleryImagePageUrl(
+      isEH: map['isEH'],
+      imageToken: map['imageToken'],
+      gid: map['gid'],
+      pageNo: map['pageNo'],
+    );
+  }
+
+  @override
+  GalleryImagePageUrl fromJson(Map<String, dynamic> map) {
+    return GalleryImagePageUrl(
+      isEH: map['isEH'],
+      imageToken: map['imageToken'],
+      gid: map['gid'],
+      pageNo: map['pageNo'],
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['isEH'] = isEH;
+    data['imageToken'] = imageToken;
+    data['gid'] = gid;
+    data['pageNo'] = pageNo;
+    return data;
+  }
 }

@@ -32,6 +32,7 @@ import 'package:jhentai/src/utils/string_uril.dart';
 import '../consts/eh_consts.dart';
 import '../database/database.dart';
 import '../exception/eh_parse_exception.dart';
+import '../model/child_gallery.dart';
 import '../model/gallery.dart';
 import '../model/gallery_metadata.dart';
 import 'byte_util.dart';
@@ -194,10 +195,10 @@ class EHSpiderParser {
     }
 
     if (text.contains('hundreds of')) {
-      return const GalleryCount(type: GalleryCountType.hundreds);
+      return  GalleryCount(type: GalleryCountType.hundreds);
     }
     if (text.contains('thousands of')) {
-      return const GalleryCount(type: GalleryCountType.thousands);
+      return  GalleryCount(type: GalleryCountType.thousands);
     }
 
     String? count = RegExp(r'([\d,\\+]+)').firstMatch(text)?.group(1);
@@ -1319,8 +1320,8 @@ class EHSpiderParser {
     }
   }
 
-  static List<({GalleryUrl galleryUrl, String title, String updateTime})> _detailPageDocument2ChildrenGallerys(Document document) {
-    List<({GalleryUrl galleryUrl, String title, String updateTime})> result = [];
+  static List<ChildGallery> _detailPageDocument2ChildrenGallerys(Document document) {
+    List<ChildGallery> result = [];
 
     List<Node>? nodes = document.querySelector('#gnd')?.nodes;
     if (nodes?.isEmpty ?? true) {
@@ -1333,7 +1334,7 @@ class EHSpiderParser {
         String href = nodes[i].attributes['href'] ?? '';
         String title = nodes[i].text ?? '';
         String updateTime = regExp.firstMatch((nodes[i + 1] as Text).data)?.group(1) ?? '';
-        result.add((galleryUrl: GalleryUrl.tryParse(href)!, title: title, updateTime: updateTime));
+        result.add(ChildGallery(galleryUrl: GalleryUrl.tryParse(href)!, title: title, updateTime: updateTime));
       }
     }
 

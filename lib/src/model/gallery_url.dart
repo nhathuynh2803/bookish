@@ -1,13 +1,15 @@
 import 'package:jhentai/src/exception/internal_exception.dart';
 
-class GalleryUrl {
+import 'base_model.dart';
+
+class GalleryUrl extends Model<GalleryUrl> {
   final bool isEH;
 
   final int gid;
 
   final String token;
 
-  const GalleryUrl({required this.isEH, required this.gid, required this.token}) : assert(token.length == 10);
+  GalleryUrl({required this.isEH, required this.gid, required this.token}) : assert(token.length == 10);
 
   static GalleryUrl? tryParse(String url) {
     RegExp regExp = RegExp(r'https://e([-x])hentai\.org/g/(\d+)/([a-z0-9]{10})');
@@ -54,5 +56,31 @@ class GalleryUrl {
   @override
   String toString() {
     return 'GalleryUrl{isEH: $isEH, gid: $gid, token: $token}';
+  }
+
+  factory GalleryUrl.fromJson(Map<String, dynamic> map) {
+    return GalleryUrl(
+      isEH: map['isEH'],
+      gid: map['gid'],
+      token: map['token'],
+    );
+  }
+
+  @override
+  GalleryUrl fromJson(Map<String, dynamic> map) {
+    return GalleryUrl(
+      isEH: map['isEH'],
+      gid: map['gid'],
+      token: map['token'],
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['isEH'] = isEH;
+    data['gid'] = gid;
+    data['token'] = token;
+    return data;
   }
 }

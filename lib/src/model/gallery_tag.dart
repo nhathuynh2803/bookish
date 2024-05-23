@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:jhentai/src/database/database.dart';
 
+import 'base_model.dart';
+
 enum EHTagStatus { confidence, skepticism, incorrect }
 
 enum EHTagVoteStatus { none, up, down }
 
-class GalleryTag {
+class GalleryTag extends Model<GalleryTag>{
   Color? color;
   Color? backgroundColor;
   TagData tagData;
@@ -20,6 +22,7 @@ class GalleryTag {
     this.voteStatus,
   });
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'color': color?.value,
@@ -43,5 +46,10 @@ class GalleryTag {
   @override
   String toString() {
     return 'GalleryTag{color: $color, backgroundColor: $backgroundColor, tagData: $tagData, tagStatus: $tagStatus, voteStatus: $voteStatus}';
+  }
+  
+  @override
+  GalleryTag fromJson(Map<String, dynamic> map) {
+    return GalleryTag.fromJson(map);
   }
 }

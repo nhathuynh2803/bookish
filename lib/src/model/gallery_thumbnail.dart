@@ -1,4 +1,6 @@
-class GalleryThumbnail {
+import 'package:jhentai/src/model/base_model.dart';
+
+class GalleryThumbnail extends Model<GalleryThumbnail> {
   String href;
 
   /// Large image
@@ -20,30 +22,14 @@ class GalleryThumbnail {
   });
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is GalleryThumbnail &&
-          runtimeType == other.runtimeType &&
-          href == other.href &&
-          thumbUrl == other.thumbUrl &&
-          isLarge == other.isLarge &&
-          thumbHeight == other.thumbHeight &&
-          thumbWidth == other.thumbWidth &&
-          offSet == other.offSet);
+  bool operator ==(Object other) => identical(this, other) || (other is GalleryThumbnail && runtimeType == other.runtimeType && href == other.href && thumbUrl == other.thumbUrl && isLarge == other.isLarge && thumbHeight == other.thumbHeight && thumbWidth == other.thumbWidth && offSet == other.offSet);
 
   @override
   int get hashCode => href.hashCode ^ thumbUrl.hashCode ^ isLarge.hashCode ^ thumbHeight.hashCode ^ thumbWidth.hashCode ^ offSet.hashCode;
 
   @override
   String toString() {
-    return 'GalleryThumbnail{' +
-        ' href: $href,' +
-        ' thumbUrl: $thumbUrl,' +
-        ' isLarge: $isLarge,' +
-        ' thumbHeight: $thumbHeight,' +
-        ' thumbWidth: $thumbWidth,' +
-        ' offSet: $offSet,' +
-        '}';
+    return 'GalleryThumbnail{' + ' href: $href,' + ' thumbUrl: $thumbUrl,' + ' isLarge: $isLarge,' + ' thumbHeight: $thumbHeight,' + ' thumbWidth: $thumbWidth,' + ' offSet: $offSet,' + '}';
   }
 
   GalleryThumbnail copyWith({
@@ -84,6 +70,29 @@ class GalleryThumbnail {
       thumbWidth: map['thumbWidth'] as double,
       offSet: map['offSet'] as double,
     );
+  }
+
+  @override
+  GalleryThumbnail fromJson(Map<String, dynamic> map) {
+    href = map['href'];
+    thumbUrl = map['thumbUrl'];
+    isLarge = map['isLarge'];
+    thumbHeight = map['thumbHeight'];
+    thumbWidth = map['thumbWidth'];
+    offSet = map['offSet'];
+    return this;
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['href'] = href;
+    data['thumbUrl'] = thumbUrl;
+    data['isLarge'] = isLarge;
+    data['thumbHeight'] = thumbHeight;
+    data['thumbWidth'] = thumbWidth;
+    data['offSet'] = offSet;
+    return data;
   }
 
 //</editor-fold>
